@@ -59,5 +59,4 @@ String lastServerReception;
             }  
         }  
     }  
-  
 }  
