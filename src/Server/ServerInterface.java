@@ -40,7 +40,6 @@ public class ServerInterface {
         
         Tile[] tiles = new Tile[NUMBER_OF_TILES];
         return tiles;
-        
         }
     }
     
