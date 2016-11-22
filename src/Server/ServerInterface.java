@@ -1,3 +1,7 @@
+package server;
+
+import board.*;
+
 class NotReceivedYetException extends Exception {
         public NotReceivedYetException(String msg) {
             super(msg);
@@ -27,9 +31,8 @@ public class ServerInterface {
             throw new NotReceivedYetException("Server hasn't sent starting tile yet!");
         } else {
         
-        Tile startTile = new Tile();
+        Tile startTile = serverStringToTile(startingTile);
         return startTile;
-        
         }
     }
     
@@ -57,5 +60,9 @@ public class ServerInterface {
     
     public void notPlaceable(Tile tile, boolean retrieveTiger, int locationX, int locationY) { //retrieveTiger true means retrieve, retrieveTiger false means place Tiger
     
+    }
+    
+    public Tile serverStringToTile(String serverString){
+        
     }
 }
