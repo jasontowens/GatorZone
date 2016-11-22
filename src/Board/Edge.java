@@ -1,3 +1,5 @@
+package board;
+
 public class Edge {
 	
 	//1 = Lake
@@ -6,23 +8,24 @@ public class Edge {
 	//4 = den
 	
 	int edgeType;
-	boolean hasMeeple;
+	boolean hasTiger;
 	boolean hasDeer;
 	boolean hasBuff;
 	boolean hasBoar;
+        
 	public Edge(int type){
-		hasMeeple = false;
+		hasTiger = false;
 		edgeType = type;		
 	}
-	public void placeMeeple(){
-		hasMeeple = true;
+	public void placeTiger(){
+		hasTiger = true;
 	}
-	public void removeMeeple(){
-		if (hasMeeple) {
-			hasMeeple = false;
+	public void removeTiger(){
+		if (hasTiger) {
+			hasTiger = false;
 		}
 		else{
-			System.out.println("No Meeple to remove");
+			System.out.println("No Tiger to Remove!");
 		}
 	}	
 	
