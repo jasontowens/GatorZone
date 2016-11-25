@@ -1,11 +1,9 @@
-package board;
+package Board;
 
 public class Edge {
-	
 	//1 = Lake
 	//2 = Jungle
 	//3 = game-trail
-	//4 = den
 	
 	int edgeType;
 	boolean hasTiger;
@@ -27,6 +25,10 @@ public class Edge {
 		else{
 			System.out.println("No Tiger to Remove!");
 		}
-	}	
+	}
+        
+        public int getEdge(){
+            return edgeType;
+        }
 	
 }
