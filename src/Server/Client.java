@@ -1,3 +1,5 @@
+package Server;
+
 import java.io.DataInputStream;  
 import java.io.DataOutputStream;  
 import java.io.IOException;  
@@ -6,9 +8,9 @@ import java.util.Scanner;
   
 public class Client {  
       
-    public static void main(String[] args) {  
-        new Client().startClient();
-    }  
+    //public static void main(String[] args) {  
+    //    new Client().startClient();
+    //}  
       
     public void startClient(){  
         try {  
