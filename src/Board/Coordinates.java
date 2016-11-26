@@ -97,7 +97,7 @@ public class Coordinates {
     
         public ArrayList<BoardSpace> getValidSpaces(Tile tile) {
             updateOuterSpaces();
-            ArrayList<BoardSpace> valid = null;
+            ArrayList<BoardSpace> valid = new ArrayList<BoardSpace>();
             for(int i = 0; i < outerSpaces.size(); i++) {
                 for(int j = 0; j < 4; j++) {
                     if(validMove(outerSpaces.get(i).x, outerSpaces.get(i).y, tile)) {
