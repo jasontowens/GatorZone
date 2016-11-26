@@ -3,47 +3,55 @@ package Server;
 import java.io.DataInputStream;  
 import java.io.DataOutputStream;  
 import java.io.IOException;  
+import java.net.InetAddress;
 import java.net.Socket;  
 import java.util.Scanner;  
   
 public class Client {  
-      
-    //public static void main(String[] args) {  
-    //    new Client().startClient();
-    //}  
-      
-    public void startClient(){  
+     
+    String lastMSG; 
+    Socket socket;
+    DataInputStream input;
+    DataOutputStream output;
+    public void startClient(String IP, int port){
+        lastMSG = "";
         try {  
-            Socket socket = new Socket("localhost", 9999);  
-            DataInputStream input = new DataInputStream(socket.getInputStream());  
-            DataOutputStream output = new DataOutputStream(socket.getOutputStream());   
+            socket = new Socket(InetAddress.getByName(IP), port);  
+            input = new DataInputStream(socket.getInputStream());  
+            output = new DataOutputStream(socket.getOutputStream());   
             String line = null;  
             listenServerReply(input);  
-            Scanner scanner = new Scanner(System.in);
-            while((line = scanner.nextLine()) != null){//read from keyboard
-                output.writeUTF(line);//sending to server 
-                System.out.println("client send msg : " + line);  
-            }  
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
     }  
       
-    //listening message from server
-    public void listenServerReply(final DataInputStream dis){  
+    public void listenServerReply(final DataInputStream input){  
         new Thread(){  
             @Override  
             public void run() {  
                 super.run();  
                 String line = null;  
                 try {  
-                    while((line = dis.readUTF()) != null){  
-                        System.out.println("client receive msg from server: " + line);  
+                    while((line = input.readUTF()) != null){  
+                       lastMSG = line.toString();
                     }  
                 } catch (IOException e) {  
                     e.printStackTrace();  
                 }  
             }  
         }.start();  
-    }  
-}  
+    }
+    
+    public String getLastMSG() {
+        return lastMSG;
+    }
+ 
+    public void sendMSG(String message) throws IOException {
+        try{    
+            output.writeUTF(message);
+        } catch (IOException e) {
+            
+        }
+    }
+}
