@@ -9,6 +9,8 @@ public class Coordinates {
             for (int i = 0; i < NUM_TILES; i++) {
                 for (int j = 0; j < NUM_TILES; j++) {
                     boardSpace[i][j] = new BoardSpace();
+                    boardSpace[i][j].x = i;
+                    boardSpace[i][j].y = j;
                 }
             }
 	}
