@@ -2,10 +2,15 @@ package Board;
 
 public class Coordinates {
 	private static final int NUM_TILES = 144;
-
+        private static final int CENTER = 71;
+        
 	public BoardSpace[][] boardSpace = new BoardSpace[NUM_TILES][NUM_TILES];
-	public Coordinates(){
-		
+        public Coordinates(){
+            for (int i = 0; i < NUM_TILES; i++) {
+                for (int j = 0; j < NUM_TILES; j++) {
+                    boardSpace[i][j] = new BoardSpace();
+                }
+            }
 	}
 	public void addTile(int x, int y, Tile tile){
                 if(validMove(x, y, tile))
@@ -35,20 +40,17 @@ public class Coordinates {
 		return true;
 	}
 	
-	public String toString(){
-	String a = "";
+	public void printBoard(){
 	for (int i = 0; i < NUM_TILES; i++){
 		for (int j = 0; j < NUM_TILES; j++ ){
 			if (boardSpace[j][i].hasTile != false){
-				a += "# ";
+				System.out.print("# ");
 			}
 			else{
-				a += "O ";
+				System.out.print("O ");
 			}
 		}
-		a += "\n";
-	}
-	return a;
-	}
+		System.out.println();
+            }
+        }
 }
-
