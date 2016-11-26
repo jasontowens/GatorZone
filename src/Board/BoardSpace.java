@@ -1,6 +1,8 @@
 package Board;
 
 public class BoardSpace {
+    int x;
+    int y;
     boolean hasTile;
     Tile tile;
     
@@ -11,5 +13,13 @@ public class BoardSpace {
     public void addTile(Tile tileToAdd){
         tile = tileToAdd;
         hasTile = true;
+    }
+    
+    public int getX(){
+        return x;
+    }
+    
+    public int getY(){
+        return y;
     }
 }
