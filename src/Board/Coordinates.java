@@ -113,4 +113,18 @@ public class Coordinates {
             }
             return (BoardSpace[]) valid.toArray();
         }
+        
+        public void printBoard(){
+            for (int i = 0; i < NUM_TILES; i++){
+ 		for (int j = 0; j < NUM_TILES; j++ ){
+ 			if (boardSpace[j][i].hasTile != false){
+ 				System.out.print("# ");
+ 			}
+ 			else{
+ 				System.out.print("O ");
+ 			}
+ 		}
+            System.out.println();
+            }
+        }
 }
