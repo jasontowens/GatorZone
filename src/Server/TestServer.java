@@ -7,14 +7,23 @@ import java.net.ServerSocket;
 import java.net.Socket;  
 import java.util.Scanner;
 
-public class Server {  
+class ServerStarter {
+    public static void main(String[] args) {
+        TestServer test = new TestServer();
+        test.startServer();
+    }
+}
+
+public class TestServer {  
 
 String lastServerReception;
-      
+boolean connected;
+
     public void startServer(){  
+        connected = false;
         try {  
             //listening 
-            ServerSocket ss = new ServerSocket(9999);  
+            ServerSocket ss = new ServerSocket(9999);
             System.out.println("server is listening...");  
             while(true){  
                 //return information when server catch client
@@ -48,9 +57,16 @@ String lastServerReception;
         public void run() {  
             super.run();  
             //read information  
-            String msg = null;  
+            String msg = null;
             try {  
-                while((msg = dis.readUTF()) != null){  
+                dos.writeUTF("THIS IS SPARTA!");
+                while((msg = dis.readUTF()) != null){
+                    while(!connected) {
+                        if(msg.substring(0,4).equals("JOIN")) {
+                            dos.writeUTF("HELLO!");
+                        }
+                        connected = true;
+                    }
                     System.out.println("client send msg ：" + msg);  
                     String replyMsg = "server reply ： " + msg;  
                     dos.writeUTF(replyMsg);  
