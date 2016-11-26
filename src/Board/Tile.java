@@ -13,6 +13,7 @@ public class Tile {
         boolean hasTiger;
         int tigerSection; //-1 if no tiger
         int middleFeature;
+        int rotation;
 	public Edge l, r, t, b;
         
 	public Tile(int r, int t, int l, int b, int m){
@@ -20,6 +21,7 @@ public class Tile {
 		this.r=new Edge(r);
 		this.t=new Edge(t);
 		this.b=new Edge(b);
+                rotation = 0;
                 middleFeature = m;
                 hasCrocodile = false;
                 hasTiger = false;
@@ -28,11 +30,15 @@ public class Tile {
 	}
         
 	public void rotate(){
-		Edge temp = t;
-		t = r;
-		r = b;
-		b = l;
-		l = temp;
+            if(rotation == 270)
+                rotation = 0;
+            else
+                rotation += 90;
+            Edge temp = t;
+            t = r;
+            r = b;
+            b = l;
+            l = temp;
 	}
         
         public int getMiddle() {
