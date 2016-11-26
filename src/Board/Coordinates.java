@@ -95,7 +95,7 @@ public class Coordinates {
             }
         }
     
-        public BoardSpace[] getValidSpaces(Tile tile) {
+        public ArrayList<BoardSpace> getValidSpaces(Tile tile) {
             updateOuterSpaces();
             ArrayList<BoardSpace> valid = null;
             for(int i = 0; i < outerSpaces.size(); i++) {
@@ -107,11 +107,7 @@ public class Coordinates {
                     tile.rotate();
                 }
             }
-            BoardSpace[] validSpaces = {};
-            if(valid == null){
-                return validSpaces;
-            }
-            return (BoardSpace[]) valid.toArray();
+            return valid;
         }
         
         public void printBoard(){
