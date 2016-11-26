@@ -1,12 +1,9 @@
 package Server;
 
 import Board.Tile;
-
-class NotReceivedYetException extends Exception {
-        public NotReceivedYetException(String msg) {
-            super(msg);
-        }
-}
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerInterface {
     
@@ -17,33 +14,42 @@ public class ServerInterface {
     String startingTile;
     String tileStack;
     
-    public ServerInterface() {
+    public ServerInterface(String IP, int port) {
         client = new Client();
-        client.startClient();
+        client.startClient(IP, port);
+        System.out.println("Test");
         startingTile = "";
         tileStack = "";
         playerID = "";
         opponentID = "";
+        try {
+            client.sendMSG("HI THERE!");
+        } catch (IOException ex) {
+            Logger.getLogger(ServerInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public Tile getStartingTile() throws NotReceivedYetException{
-        if (startingTile == "") {
-            throw new NotReceivedYetException("Server hasn't sent starting tile yet!");
-        } else {
+    public Tile getStartingTile(){
+        while(startingTile.equals("")) {
+            String msg = client.lastMSG;
+            if(msg.substring(0, 16).equals("STARTING TILE IS")) {
+                
+            }
+        }
         
         Tile startTile = serverStringToTile(startingTile);
         return startTile;
-        }
+        
     }
     
-    public Tile[] getTileStack() throws NotReceivedYetException{
-        if (tileStack == "") {
-            throw new NotReceivedYetException("Server hasn't sent tile stack yet!");
-        } else {
+    public Tile[] getTileStack(){
+        while(tileStack.equals("")) {
+        
+        }
         
         Tile[] tiles = new Tile[NUMBER_OF_TILES];
         return tiles;
-        }
+        
     }
     
     public void joinServer(String tournamentPassword, String username, String password) {
