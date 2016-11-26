@@ -1,10 +1,12 @@
 package Server;
 
+import Board.BoardSpace;
 import Board.Tile;
+import static Core.TileConvertor.serverStringToTile;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.Scanner;
 public class ServerInterface {
     
     private static final int NUMBER_OF_TILES = 72;
@@ -14,19 +16,35 @@ public class ServerInterface {
     String startingTile;
     String tileStack;
     
-    public ServerInterface(String IP, int port) {
+    public ServerInterface() {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter The IP: ");
+        String IP = scan.next();
+        System.out.print("Enter The Port: ");
+        int port = scan.nextInt();
         client = new Client();
         client.startClient(IP, port);
-        System.out.println("Test");
         startingTile = "";
         tileStack = "";
         playerID = "";
         opponentID = "";
+        System.out.print("Enter Tournament Password: ");
+        String tpass = scan.next();
         try {
-            client.sendMSG("HI THERE!");
+            client.sendMSG("JOIN " + tpass);
         } catch (IOException ex) {
             Logger.getLogger(ServerInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.print("Enter Username: ");
+        String username = scan.next();
+        System.out.print("Enter Password: ");
+        String sessionpass = scan.next();
+        try {
+            client.sendMSG("I AM " + username + " " + sessionpass);
+        } catch (IOException ex) {
+            Logger.getLogger(ServerInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public Tile getStartingTile(){
@@ -60,81 +78,15 @@ public class ServerInterface {
         
     }
     
+    public void placeTile(BoardSpace space) {
+        
+    }
+    
     public void notPlaceable(Tile tile) { //If no other arguments, assume pass turn
         
     }
     
     public void notPlaceable(Tile tile, boolean retrieveTiger, int locationX, int locationY) { //retrieveTiger true means retrieve, retrieveTiger false means place Tiger
     
-    }
-    
-    public String tileToServerString(Tile tile) {
-        String result = "";
-        result += featureIntToString(tile.t.getEdge());
-        result += featureIntToString(tile.r.getEdge());
-        result += featureIntToString(tile.b.getEdge());
-        result += featureIntToString(tile.l.getEdge());
-        result += featureIntToString(tile.getMiddle());
-        return result;
-    }
-    
-    public Tile serverStringToTile(String serverString){
-        
-        int top = featureCharToInt(serverString.charAt(0));
-        int right = featureCharToInt(serverString.charAt(1));
-        int bottom = featureCharToInt(serverString.charAt(2));
-        int left = featureCharToInt(serverString.charAt(3));
-        int middle = featureCharToInt(serverString.charAt(4));
-        
-        return new Tile(right, top, left, bottom, middle);     
-    }
-    
-    public String featureIntToString(int feature) {
-        if (feature == 2)
-            return "J";
-        if (feature == 1)
-            return "L";
-        if (feature == 3)
-            return "T";
-        if (feature == 0)
-            return "-";
-        if (feature == 4)
-            return "B";
-        if (feature == 5)
-            return "C";
-        if (feature == 6)
-            return "D";
-        if (feature == 7)
-            return "P";
-        if (feature == 8)
-            return "X";
-        
-       System.out.println("Invalid Feature Specified");
-        return "E";
-    }
-    
-    public int featureCharToInt(char feature){
-        if (feature == 'J')
-            return 2;
-        if (feature == 'L')
-            return 1;
-        if (feature == 'T')
-            return 3;
-        if (feature == '-')
-            return 0;
-        if (feature == 'B')
-            return 4;
-        if (feature == 'C')
-            return 5;
-        if (feature == 'D')
-            return 6;
-        if (feature == 'P')
-            return 7;
-        if (feature == 'X')
-            return 8;
-      
-        System.out.println("Invalid Feature Specified");
-        return -1;
-        
     }
 }
