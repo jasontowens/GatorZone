@@ -15,20 +15,22 @@ class ServerStarter {
 }
 
 public class TestServer {  
+//TEST Variables
+private static final int NUM_OF_ROUNDS = 3;
+private static final int NUM_OF_MATCHES = 2;
 
+private int matchOn = 0;
+private int roundOn = 0;
 String lastServerReception;
-boolean connected;
 
-    public void startServer(){  
-        connected = false;
+    public void startServer(){
         try {  
             //listening 
             ServerSocket ss = new ServerSocket(9999);
-            System.out.println("server is listening...");  
             while(true){  
                 //return information when server catch client
                 Socket s = ss.accept();  
-                System.out.println("a client has connected!");  
+                System.out.println("THIS IS SPARTA!");  
                 //connected 
                 new CommunicateThread(s).start();  
             }  
@@ -59,18 +61,29 @@ boolean connected;
             //read information  
             String msg = null;
             try {  
-                dos.writeUTF("THIS IS SPARTA!");
                 while((msg = dis.readUTF()) != null){
-                    while(!connected) {
                         if(msg.substring(0,4).equals("JOIN")) {
                             dos.writeUTF("HELLO!");
                         }
-                        connected = true;
-                    }
-                    System.out.println("client send msg ：" + msg);  
-                    String replyMsg = "server reply ： " + msg;  
-                    dos.writeUTF(replyMsg);  
-                    System.out.println("server reply msg ：" + replyMsg);  
+                        if(msg.substring(0,4).equals("I AM")) {
+                            int endSpace = msg.length();
+                            for(int i = 5; i < msg.length(); i++){
+                                if(msg.charAt(i) == ' '){
+                                    endSpace = i;
+                                    break;
+                                }
+                            }
+                            String name = "WELCOME" + msg.substring(5, endSpace + 1) + "PLEASE WAIT FOR NEXT CHALLENGE";
+                            dos.writeUTF(name);
+                            dos.writeUTF("");
+                            dos.writeUTF("");
+                            dos.writeUTF("");
+                            dos.writeUTF("");
+                        }
+                    System.out.println("CLIENT：" + msg);  
+                    //String replyMsg = "server reply ： " + msg;  
+                    //dos.writeUTF(replyMsg);  
+                    //System.out.println("server reply msg ：" + replyMsg);  
                 }  
             } catch (IOException e) {  
                 e.printStackTrace();  
