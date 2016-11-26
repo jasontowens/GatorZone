@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Core;
 
 import Board.Tile;
 
-/**
- *
- * @author rg_ra
- */
 public class TileConvertor {
         public static String tileToServerString(Tile tile) {
         String result = "";
