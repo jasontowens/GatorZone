@@ -18,7 +18,7 @@ public class AI extends Player {
 				//pass
 		} 
 		else if (numMoves == 1) {
-			if(tile.middleFeature==8){
+			if(tile[0].middleFeature==8){
 				// return single move w/ tiger
 			}
 			else
