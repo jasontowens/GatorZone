@@ -18,6 +18,33 @@ public class Coordinates {
                 }
             }
 	}
+        public BoardSpace[][] copy(){
+        	BoardSpace[][] copy = new BoardSpace[NUM_TILES][NUM_TILES];
+        	for (int i = 0; i < NUM_TILES; i++) {
+                for (int j = 0; j < NUM_TILES; j++) {
+                	if (boardSpace[i][j].hasTile){
+                		copy[i][j] = new BoardSpace(boardSpace[i][j].tile);
+                	}
+                	else{
+                		copy[i][j] = new BoardSpace();
+                	}
+                    copy[i][j].x = i;
+                    copy[i][j].y = j;
+                }
+            }
+        	return copy;
+        }
+        
+        public void resetFlags(){
+        	for (int i = 0; i < NUM_TILES; i++) {
+                for (int j = 0; j < NUM_TILES; j++){
+                	if (boardSpace[i][j].AIflag){
+                		boardSpace[i][j].AIflag = false;
+                	}
+                }
+        	}
+        	
+        }
         
         public BoardSpace top(BoardSpace space){
             return boardSpace[space.x][space.y+1];
@@ -97,12 +124,12 @@ public class Coordinates {
     
         public ArrayList<BoardSpace> getValidSpaces(Tile tile) {
             updateOuterSpaces();
-            ArrayList<BoardSpace> valid = new ArrayList();
+            ArrayList<BoardSpace> valid = new ArrayList<BoardSpace>();
             for(int i = 0; i < outerSpaces.size(); i++) {
                 for(int j = 0; j < 4; j++) {
                     if(validMove(outerSpaces.get(i).x, outerSpaces.get(i).y, tile)) {
                         valid.add(outerSpaces.get(i));
-                        break;
+			break;
                     }
                     tile.rotate();
                 }
