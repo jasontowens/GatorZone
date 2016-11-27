@@ -25,18 +25,18 @@ public class AI extends Player {
 			// return single move
 		} 
 		else {// numMoves is numerous and must be chosen carefully
-			if(tile.middleFeature==8){//if tile has a den
+			if(tile[0].middleFeature==8){//if tile has a den
 				//count number of adjacent tiles for each valid space, return legal move with most adjacent tiles
 			}
-			else if(tile.l==1||tile.r==1||tile.t==1||tile.b==1){//priority1:lakes if tile has lake 
+			else if(tile[0].l==1||tile[0].r==1||tile[0].t==1||tile[0].b==1){//priority1:lakes if tile has lake 
 					//look for unfinished lake w/o opponent tiger or croc
 					
 			}
-			else if(tile.l==3||tile.r==3||tile.t==3||tile.b==3){//priority2:game trails if tile has lake 
+			else if(tile[0].l==3||tile[0].r==3||tile[0].t==3||tile[0].b==3){//priority2:game trails if tile has lake 
 					//look for unfinished game trail w/o opponent tiger or croc
 					
 			}
-			else if(tile.l==2||tile.r==2||tile.t==2||tile.b==2){//priority3:jungles if tile has jungle 
+			else if(tile[0].l==2||tile[0].r==2||tile[0].t==2||tile[0].b==2){//priority3:jungles if tile has jungle 
 					//look for unfinished w/o opponent tiger or croc
 					
 			}
