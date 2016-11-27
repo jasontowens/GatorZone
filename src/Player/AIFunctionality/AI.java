@@ -6,7 +6,44 @@ import Board.*;
 
 
 public class AI extends Player {
-
+	public BoardSpace makeNextMove(Tile[] tiles, Coordinates coor, BoardSpace[] validSpaces) {
+		int numMoves = tiles.length;
+		if (tiles.isEmpty()) {
+			if (tigers > 0) {
+				// check finished lakes for 1 opponent meeple and 1 owned meeple
+				// place a meeple
+				//else check roads place meeple there
+			}
+			else
+				//pass
+		} 
+		else if (numMoves == 1) {
+			if(tile.middleFeature==8){
+				// return single move w/ tiger
+			}
+			else
+			// return single move
+		} 
+		else {// numMoves is numerous and must be chosen carefully
+			if(tile.middleFeature==8){//if tile has a den
+				//count number of adjacent tiles for each valid space, return legal move with most adjacent tiles
+			}
+			else if(tile.l==1||tile.r==1||tile.t==1||tile.b==1){//priority1:lakes if tile has lake 
+					//look for unfinished lake w/o opponent tiger or croc
+					
+			}
+			else if(tile.l==3||tile.r==3||tile.t==3||tile.b==3){//priority2:game trails if tile has lake 
+					//look for unfinished game trail w/o opponent tiger or croc
+					
+			}
+			else if(tile.l==2||tile.r==2||tile.t==2||tile.b==2){//priority3:jungles if tile has jungle 
+					//look for unfinished w/o opponent tiger or croc
+					
+			}
+		//priority==dens(while up), lakes,  game trails, jungles
+		//finish the unfinished->start new 
+		}
+	}
 	/*
 	 * Ideas:
 	 * 
