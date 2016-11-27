@@ -1,12 +1,10 @@
 package Core;
 
-import Board.BoardSpace;
-import Board.Coordinates;
-import Board.Tile;
-import Player.AIFunctionality.AI;
-import Player.Player;
-import Server.ServerInterface;
+import Board.*;
+import Player.*;
+import Server.*;
 import UI.GameWindow;
+import java.util.ArrayList;
 
 
 
@@ -17,9 +15,14 @@ public class GameDirector {
 	boolean endOfGame = false;
         
         public void run(){
-            GameWindow window = new GameWindow();
-            ServerInterface server = new ServerInterface();
-            Tile tiles[] = server.getTileStack();
+            StartingInfo start = new StartingInfo();
+            start.setVisible(true);
+            while(!(start.confirmed)){
+            }
+            ServerInterface server = new ServerInterface(start.getIP(), start.getPort(), start.getTPass(),
+                                                         start.getUser(), start.getPass());
+            start = null;
+            //Tile tiles[] = server.getTileStack();
             Coordinates gameA = new Coordinates();
             Coordinates gameB = new Coordinates();
             gameA.addTile(71, 71, TileConvertor.serverStringToTile("TLTJ-")); //This puts the start tile on the board
@@ -27,12 +30,6 @@ public class GameDirector {
             
             AI player1 = new AI();
             int turn = 0;
-            while(!endOfGame) {
-                BoardSpace[] validSpaces = gameA.getValidSpaces(tiles[turn]);
-                player1.makeNextMove(tiles, gameA, validSpaces);
-                turn++;
-                endOfGame = true;
-            }
             
         }
         
