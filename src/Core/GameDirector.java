@@ -5,6 +5,7 @@ import Player.*;
 import Server.*;
 import UI.GameWindow;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 
@@ -14,10 +15,11 @@ import java.util.ArrayList;
 public class GameDirector {
 	boolean endOfGame = false;
         
-        public void run(){
+        public void run() throws InterruptedException{
             StartingInfo start = new StartingInfo();
             start.setVisible(true);
             while(!(start.confirmed)){
+                TimeUnit.SECONDS.sleep(1);
             }
             ServerInterface server = new ServerInterface(start.getIP(), start.getPort(), start.getTPass(),
                                                          start.getUser(), start.getPass());
