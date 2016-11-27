@@ -16,31 +16,32 @@ public class ServerInterface {
     String startingTile;
     String tileStack;
     
-    public ServerInterface() {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Enter The IP: ");
-        String IP = scan.next();
-        System.out.print("Enter The Port: ");
-        int port = scan.nextInt();
+    public String IP;
+    public int port;
+    public String tpass;
+    public String username;
+    public String password;
+    
+    public ServerInterface(String IP, int port, String tpass, String username, String password) {
+        this.IP = IP;
+        this.port = port;
+        this.tpass = tpass;
+        this.username = username;
+        this.password = password;
+        
         client = new Client();
         client.startClient(IP, port);
         startingTile = "";
         tileStack = "";
         playerID = "";
         opponentID = "";
-        System.out.print("Enter Tournament Password: ");
-        String tpass = scan.next();
         try {
             client.sendMSG("JOIN " + tpass);
         } catch (IOException ex) {
             Logger.getLogger(ServerInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.print("Enter Username: ");
-        String username = scan.next();
-        System.out.print("Enter Password: ");
-        String sessionpass = scan.next();
         try {
-            client.sendMSG("I AM " + username + " " + sessionpass);
+            client.sendMSG("I AM " + username + " " + password);
         } catch (IOException ex) {
             Logger.getLogger(ServerInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
